@@ -6,6 +6,5 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 
 def homepage_view(request):
-    print("hLELO")
-    return
+    return render(request, 'foodstorage/homepage.html')
 

@@ -3,9 +3,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 
 
 def signup_view(request):
@@ -15,7 +12,7 @@ def signup_view(request):
             username = form.cleaned_data.get('username')
             form.save()
             messages.success(request, f'Account created for {username}!')
-            return redirect('login')
+            return redirect('authentication:login')
     else:
         form = UserCreationForm()
     return render(request, 'authentication/signup.html', {'form': form})
@@ -38,7 +35,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('authentication:login')
 
 def navbar_view(request):
-    return render(request, 'authentication/unauthenticated_navbar.html')
+    return render(request, 'users/navbar.html')
